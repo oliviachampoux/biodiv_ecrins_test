@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Biodiversité Parc des Écrins</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.20.0/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.20.0/mapbox-gl.css" rel="stylesheet" />
+  <style>
+    body { margin: 0; font-family: sans-serif; }
+
+    h1 {
+      text-align: center;
+      margin: 20px 0 5px 0;
+      font-size: 24px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 15px;
+      font-style: italic;
+    }
+
+    .map-container {
+      width: 100%;
+      height: 90vh;
+      position: relative;
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+
+    .legend {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.95);
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      max-width: 200px;
+    }
+
+    .legend-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 15px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .legend-color {
+      width: 20px;
+      height: 16px;
+      margin-right: 10px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+    }
+
+    .obs-1    { background: #f0f921; }
+    .obs-2    { background: #fdc926; }
+    .obs-5    { background: #fa9f3b; }
+    .obs-10   { background: #ed7953; }
+    .obs-15   { background: #d7576c; }
+    .obs-20   { background: #bd3785; }
+    .obs-30   { background: #9c179e; }
+    .obs-40   { background: #7300a8; }
+    .obs-50   { background: #46039f; }
+    .obs-80   { background: #0d0887; color: white; }
+
+    .map-buttons {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 1;
+      background: rgba(255,255,255,0.9);
+      padding: 6px 10px;
+      border-radius: 4px;
+    }
+
+    .map-buttons button {
+      margin: 2px;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Biodiversité observée au Parc National des Écrins en 2024</h1>
+  <div class="subtitle">Observed biodiversity in Écrins National Park in 2024</div>
+
+  <div class="map-container">
+    <div id="map"></div>
+
+    <div class="map-buttons">
+      <button id="customStyle">Mon style</button>
+      <button id="satellite">Satellite</button>
+    </div>
+
+    <div class="legend">
+      <div class="legend-title">Nombre d'observations/Number of observations</div>
+      <div class="legend-item"><div class="legend-color obs-1"></div> 1-2</div>
+      <div class="legend-item"><div class="legend-color obs-2"></div> 2-5</div>
+      <div class="legend-item"><div class="legend-color obs-5"></div> 5-10</div>
+      <div class="legend-item"><div class="legend-color obs-10"></div> 10-15</div>
+      <div class="legend-item"><div class="legend-color obs-15"></div> 15-20</div>
+      <div class="legend-item"><div class="legend-color obs-20"></div> 20-30</div>
+      <div class="legend-item"><div class="legend-color obs-30"></div> 30-40</div>
+      <div class="legend-item"><div class="legend-color obs-40"></div> 40-50</div>
+      <div class="legend-item"><div class="legend-color obs-50"></div> 50-80</div>
+      <div class="legend-item"><div class="legend-color obs-80"></div> > 80</div>
+    </div>
+  </div>
+
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoib2xpdmlhY2hweCIsImEiOiJja2dudzdleHYwNHpqMnFudnU2a3ZuOXlwIn0.nkeRTjH5cnbpFHaFSLQd6A';
+
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/oliviachpx/cmf54ebch00ds01se2ykk87jq',
+      center: [6.35, 44.85],
+      zoom: 10
+    });
+
+    // Boutons pour changer de fond
+    document.getElementById('customStyle').addEventListener('click', () => {
+      map.setStyle('mapbox://styles/oliviachpx/cmf54ebch00ds01se2ykk87jq');
+    });
+
+    document.getElementById('satellite').addEventListener('click', () => {
+      map.setStyle('mapbox://styles/mapbox/satellite-v9');
+    });
+  </script>
+
+</body>
+</html>
